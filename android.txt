@@ -1,0 +1,26 @@
+view模块
+
+1、view绘制流程
+
+onMeasure 计算自身控件的大小，宽度，margin,padding 算出来view的宽度
+mode: AT_MOST 对应 wrap ; excetly 精确的
+onMeasure 流程是先计算子view的位置，最后在计算出parent的宽度和高度
+onLayout(l,r,t,b)  用来确定当前View在ViewGroup中的位置 这里面用到padding ,margin,相对于parent的一个相对位置
+
+2、view的生命周期
+ 
+   constructor
+   onFinishInflate
+   Activity onCreate
+   Activity onResume
+   onAttachedToWindow
+   onMeasure
+   onLayout
+   onDraw
+   onDetachedFromWindow
+在Activity的onCreate方法中加载View，View的onFinishInflate会被调用，继而Activity的生命周期执行到onResume方法之后View才被附着到窗口上，继而进行绘制工作，onMeasure、onSizeChanged 、onLayout、onDraw
+
+3、注意事项：
+   不要在ondraw里面做过多的耗时操作和new 一些对象，应该这个是被一致执行的 60fps 16ms 
+   丢帧： 16ms 内没有绘制完成，下一个16ms来了，就会出现 
+   overdraw:屏幕上的某个像素在同一帧的时间内被绘制了多次 canvers.clip(),viewstub,merge ：复杂的Layout层级，重叠的View，重叠的背景这几种
