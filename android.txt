@@ -24,3 +24,43 @@ onLayout(l,r,t,b)  用来确定当前View在ViewGroup中的位置 这里面用�
    不要在ondraw里面做过多的耗时操作和new 一些对象，应该这个是被一致执行的 60fps 16ms 
    丢帧： 16ms 内没有绘制完成，下一个16ms来了，就会出现 
    overdraw:屏幕上的某个像素在同一帧的时间内被绘制了多次 canvers.clip(),viewstub,merge ：复杂的Layout层级，重叠的View，重叠的背景这几种
+
+
+4、动画
+   传统动画 ：帧动画，补间动画(alpha,translate,scale,rotate)
+   属性动画：改变View的一些属性，ObjectAnimator动画
+
+5、自定义View ,ViewGroup
+
+   viewgroup:onMeasure, onLayout 进行处理
+
+
+imageView模块
+
+1、setImageResource UI 主线程操作
+   setImageBitmap  转化为setImageDrawable
+   setImageDrawable 建议使用
+
+
+bitmap 模块
+
+图片内存大小计算：width* heigth*每一个像素占用字节数
+
+ALPHA 1;  RGB_565: 2 ; ARGB_4444 : 2 ;  ARGB_8888: 4 
+
+质量压缩：改变quality， 图片上传，分享，限制图片大小等等
+采用压缩：改变inSampleSize 采样率，用来显示到界面上，内存限制
+缩放压缩：martix，改变了图片的大小（长度宽度）
+RGB_565压缩：设置inPreferredConfig = Bitmap.Config.RGB_565 
+
+compress(CompressFormat.PNG, quality, baos);这样的png格式，quality就没有作用了，bytes.length不会变化，因为png图片是无损的，不能进行压缩
+
+
+质量压缩无法避免oom,但可以改变图片在磁盘中或者说是File文件的大小，尺寸压缩可以避免OOM，但不改变图片本身的大小,只改变加载是在内存中的大小，即bitmap
+
+
+BitmapRegionDecoder 处理图片分片展示，区域解码器
+
+
+
+
