@@ -62,5 +62,18 @@ compress(CompressFormat.PNG, quality, baos);这样的png格式，quality就没�
 BitmapRegionDecoder 处理图片分片展示，区域解码器
 
 
+listView recycleView 区分
+
+recycleView:
+1、ViewHolder配置
+2、支持更多，layoutmanager支持grid,linear ,StaggeredGrid
+3、item动画效果
+4、高效的item刷新，局部刷新
+5、缓存机制不同，更高效,尤其是离开屏幕后，然后再次进行加载，缓存机制不同，更高效，具体内部代码看到
+   可以自定义，recycleView的ViewCacheExtension 和 RecycledViewPool 使用 可以提供一个全局的recycleView,减少内存使用
+
+
+
+
 
 
