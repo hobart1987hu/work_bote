@@ -34,12 +34,21 @@ onLayout(l,r,t,b)  用来确定当前View在ViewGroup中的位置 这里面用�
 
    viewgroup:onMeasure, onLayout 进行处理
 
+   listView recycleView 区分
+   recycleView:
+   ViewHolder配置
+   支持更多，layoutmanager支持grid,linear ,StaggeredGrid
+   item动画效果
+   高效的item刷新，局部刷新
+   缓存机制不同，更高效,尤其是离开屏幕后，然后再次进行加载，会根据position 和 ViewHolder的flag进行双重判断，是否bindHolder还是从cache里面获取
+      recycleView的ViewCacheExtension 和 RecycledViewPool 使用 可以提供一个全局的recycleView,减少内存使用
+
 
 imageView模块
 
-1、setImageResource UI 主线程操作
-   setImageBitmap  转化为setImageDrawable
-   setImageDrawable 建议使用
+setImageResource UI 主线程操作
+setImageBitmap  转化为setImageDrawable
+setImageDrawable 建议使用
 
 
 bitmap 模块
@@ -62,18 +71,13 @@ compress(CompressFormat.PNG, quality, baos);这样的png格式，quality就没�
 BitmapRegionDecoder 处理图片分片展示，区域解码器
 
 
-listView recycleView 区分
 
-recycleView:
-1、ViewHolder配置
-2、支持更多，layoutmanager支持grid,linear ,StaggeredGrid
-3、item动画效果
-4、高效的item刷新，局部刷新
-5、缓存机制不同，更高效,尤其是离开屏幕后，然后再次进行加载，缓存机制不同，更高效，具体内部代码看到
-   可以自定义，recycleView的ViewCacheExtension 和 RecycledViewPool 使用 可以提供一个全局的recycleView,减少内存使用
+activity模块
+
+1、ActivityGroup 可以把activity当作一个View来实现，可以实现多个activity共享一个View效果,例如：购物车，2个activity无缝衔接
 
 
-
+2、Activity生命周期流程：
 
 
 
