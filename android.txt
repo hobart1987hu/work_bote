@@ -88,9 +88,54 @@ http://gityuan.com/2016/03/18/start-activity-cycle/
 
 https://www.jianshu.com/p/61b37fa411ca
 
+
+系统模块：
+
+1、 AIDL通信
+
+2、 进程间通信
+
 3、 ActivityManagerService、 InputManagerService、 WindowManagerService，机制了解
 
 http://zjutkz.net/2016/11/17/Android%E4%B8%AD%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E5%88%86%E6%9E%90/
+
+
+4、android 插件化：
+  app启动：
+   一个apk里面至少有2个classloader：
+   boot类型的classloader:加载framework层的类
+   apk里面的dex文件，文件里面都是java类，需要classloader去加载，这样就会创建一个apk的classloader 属于：pathdexclassloader
+
+   jvm里面通过defineclass去加载jar里面的class文件
+   android 里面通过findclass去加载class文件,先从当前的classloader的缓存里面去找，然后在从parent去找，没有在create这个类
+   相同class  = 相同的classname + packagename+ classloader
+
+   dexclassloader:可以加载jar,dex,apk，未安装
+   pathclassloader:加载安装过的apk optimizedpathdir 为null,
+   optimizedpathdir,用来缓存我们需要加载dex文件的。
+   dexpathlist 用来加载class的，findclass方法
+   basedexclassloader类中去加载class , 实际是从dexpathlist里面去查找
+   https://android.googlesource.com/platform/libcore/+/09bb615/dalvik/src/main/java/dalvik/system/DexClassLoader.java
+
+   了解app内部机制，可以实现动态加载插件
+
+
+ 5、apk包内部数据  
+
+  libs/ jar|| so 等文件
+  assets/ 静态文件
+  res/ 资源文件
+  class.dex 一个或者多个
+  resources.arsc 可以理解为一个数据库用来存放资源文件和id 的映射关系
+  manifest.xml
+  meta-inf 证书信息
+
+  安装过程：
+  1、copy apk文件到/data/app目录下面
+  2、校验apk的信息，例如：签名信息，结构正常，是否已经破坏
+  3、解压apk中的文件，校验apk中的dex文件，如果没有问题，转换为odex,同时在/data/data/目录下面创建包名文件夹， copy相应的数据
+
+
 
 
 
