@@ -1,0 +1,29 @@
+常用集合和列表模块
+1、hashmap:key ,value 都可以为空，非线程安全，内部采用数组+链表（1.7） ｜｜ 红黑树（1.8）结构
+   主要内部有一个 node []table 数组，  key:hash值计算处理
+2、hashtable: key:不能为空，线程安全，在方法上面加锁处理   
+
+3、vector: 内部数组结构，线程安全
+
+4、stack extends vector， 先进后出
+
+5、concurrentmap,concurrenthashmap,concurrentlinkedqueue,
+
+
+6、linkedblockingqueue,linkedblockingdeque
+
+
+7、linkedhashmap,linkedhashset,linkedlist
+
+  linkedhashmap extends hashmap 插入有顺序，迭代按照插入显示
+
+  linkedhashset extends hashset
+
+  linkedlist:双向链式结构 first, last 2个node
+
+
+8、treemap,treeset,hashmap,hashset
+  tree:代表有插入是按照一定顺序的，treeset,里面的key要唯一
+  treeset内部是采用treemap实现的， put时候，value = object
+  hashset内部是通过hashmap实现的，value = object
+
